@@ -267,7 +267,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     mPasswordMinNonLetter), mLockPatternUtils.getRequestedPasswordMinimumNonLetter(
                     mUserId));
 
-            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
+            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity(), this);
             mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
 
             if (intent.getBooleanExtra(

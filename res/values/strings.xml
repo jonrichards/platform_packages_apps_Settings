@@ -7891,4 +7891,8 @@
 
     <string name="keyguard_camera_title">Camera on lockscreen</string>
     <string name="keyguard_camera_summary">Allow using the default camera app from the lockscreen</string>
+
+    <!-- randomize MAC addresses -->
+    <string name="randomize_mac_title">Randomize MAC addresses</string>
+    <string name="randomize_mac_summary">Assign random MAC addresses when network devices are enabled. MAC randomization is used during scanning whether or not this is enabled.</string>
 </resources>

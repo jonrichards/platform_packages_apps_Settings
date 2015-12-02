@@ -7860,4 +7860,8 @@
 
     <string name="deny_new_usb_title">USB accessories</string>
     <string name="deny_new_usb_summary">Control support for USB peripherals such as input (mice, keyboards, joysticks) and storage devices.</string>
+
+    <!-- randomize MAC addresses -->
+    <string name="randomize_mac_title">Randomize MAC addresses</string>
+    <string name="randomize_mac_summary">Assign random MAC addresses when network devices are enabled. MAC randomization is used during scanning whether or not this is enabled.</string>
 </resources>

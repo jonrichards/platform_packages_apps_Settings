@@ -57,6 +57,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_MANUAL = "manual";
     private static final String KEY_REGULATORY_INFO = "regulatory_info";
     private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
+    private static final String KEY_LEGACY_SYSTEM_UPDATE_SETTINGS = "legacy_system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     private static final String PROPERTY_SELINUX_STATUS = "ro.build.selinux";
     private static final String KEY_KERNEL_VERSION = "kernel_version";
@@ -159,13 +160,13 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         // These are contained by the root preference screen
         PreferenceGroup parentPreference = getPreferenceScreen();
 
-        if (mUm.isAdminUser()) {
-            Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference,
-                    KEY_SYSTEM_UPDATE_SETTINGS,
-                    Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        } else {
+        if (!mUm.isAdminUser() || !SystemProperties.getBoolean("ro.build.ab_update", false)) {
             // Remove for secondary users
             removePreference(KEY_SYSTEM_UPDATE_SETTINGS);
+        }
+
+        if (!mUm.isAdminUser() || SystemProperties.getBoolean("ro.build.ab_update", false)) {
+            removePreference(KEY_LEGACY_SYSTEM_UPDATE_SETTINGS);
         }
 
         // Read platform settings for additional system update setting

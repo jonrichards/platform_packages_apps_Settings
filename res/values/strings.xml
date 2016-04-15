@@ -7499,4 +7499,7 @@
 
     <!-- Message for telling the user the kind of BT device being displayed in list. -->
     <string name="bluetooth_talkback_bluetooth">Bluetooth</string>
+
+    <string name="deny_new_usb_title">USB accessories</string>
+    <string name="deny_new_usb_summary">Control support for USB peripherals such as input (mice, keyboards, joysticks) and storage devices.</string>
 </resources>

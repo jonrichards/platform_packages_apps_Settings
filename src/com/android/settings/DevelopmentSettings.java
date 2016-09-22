@@ -118,7 +118,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String BT_HCI_SNOOP_LOG = "bt_hci_snoop_log";
     private static final String WEBVIEW_PROVIDER_KEY = "select_webview_provider";
-    private static final String WEBVIEW_MULTIPROCESS_KEY = "enable_webview_multiprocess";
     private static final String ENABLE_OEM_UNLOCK = "oem_unlock_enable";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
@@ -290,7 +289,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mAnimatorDurationScale;
     private ListPreference mOverlayDisplayDevices;
 
-    private SwitchPreference mWebViewMultiprocess;
     private ListPreference mWebViewProvider;
 
     private ListPreference mSimulateColorSpace;
@@ -450,7 +448,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
         mWebViewProvider = addListPreference(WEBVIEW_PROVIDER_KEY);
-        mWebViewMultiprocess = findAndInitSwitchPref(WEBVIEW_MULTIPROCESS_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
 
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
@@ -720,7 +717,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateSimulateColorSpace();
         updateUSBAudioOptions();
         updateForceResizableOptions();
-        updateWebViewMultiprocessOptions();
         updateWebViewProviderOptions();
         updateOemUnlockOptions();
         if (mColorTemperaturePreference != null) {
@@ -785,25 +781,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     return;
                 }
             }
-        } catch(RemoteException e) {
-        }
-    }
-
-    private void updateWebViewMultiprocessOptions() {
-        updateSwitchPreference(mWebViewMultiprocess,
-                Settings.Global.getInt(getActivity().getContentResolver(),
-                        Settings.Global.WEBVIEW_MULTIPROCESS, 0) != 0);
-    }
-
-    private void writeWebViewMultiprocessOptions() {
-        boolean value = mWebViewMultiprocess.isChecked();
-        Settings.Global.putInt(getActivity().getContentResolver(),
-                Settings.Global.WEBVIEW_MULTIPROCESS, value ? 1 : 0);
-
-        try {
-            String wv_package = mWebViewUpdateService.getCurrentWebViewPackageName();
-            ActivityManagerNative.getDefault().killPackageDependents(
-                    wv_package, UserHandle.USER_ALL);
         } catch(RemoteException e) {
         }
     }
@@ -2041,8 +2018,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             startBackgroundCheckFragment();
         } else if (preference == mBluetoothDisableAbsVolume) {
             writeBluetoothDisableAbsVolumeOptions();
-        } else if (preference == mWebViewMultiprocess) {
-            writeWebViewMultiprocessOptions();
         } else if (SHORTCUT_MANAGER_RESET_KEY.equals(preference.getKey())) {
             resetShortcutManagerThrottling();
         } else {

@@ -7864,4 +7864,8 @@
     <!-- randomize MAC addresses -->
     <string name="randomize_mac_title">Randomize MAC addresses</string>
     <string name="randomize_mac_summary">Assign random MAC addresses when network devices are enabled. MAC randomization is used during scanning whether or not this is enabled.</string>
+
+    <!-- background clipboard access -->
+    <string name="background_clipboard_title">Allow background clipboard access</string>
+    <string name="background_clipboard_summary">Enable access to the clipboard by applications in the background.</string>
 </resources>

@@ -98,6 +98,17 @@
                         android:data="https://source.android.com/security/bulletin/" />
         </PreferenceScreen>
 
+        <!-- Extra security patches -->
+        <com.android.settings.DividerPreference
+                android:key="security_patch_extra"
+                android:enabled="false"
+                android:shouldDisableView="false"
+                android:selectable="false"
+                android:title="@string/security_patch_extra"
+                android:summary="@string/device_info_default"
+                settings:allowDividerAbove="true"
+                settings:allowDividerBelow="true"/>
+
         <!-- Device FCC equipment id -->
         <com.android.settings.DividerPreference
                 android:key="fcc_equipment_id"

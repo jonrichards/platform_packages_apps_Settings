@@ -66,11 +66,14 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_BASEBAND_VERSION = "baseband_version";
     private static final String KEY_FIRMWARE_VERSION = "firmware_version";
     private static final String KEY_SECURITY_PATCH = "security_patch";
+    private static final String KEY_SECURITY_PATCH_EXTRA = "security_patch_extra";
     private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
     private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
     private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
     private static final String KEY_SAFETY_LEGAL = "safetylegal";
+
+    private static final String SECURITY_PATCH_EXTRA = "CVE-2016-5195\nAndroidID-30403356\nAndroidID-31929765\nAndroidID-31960359\nAndroidID-32377688";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -111,6 +114,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         } else {
             getPreferenceScreen().removePreference(findPreference(KEY_SECURITY_PATCH));
         }
+
+        setStringSummary(KEY_SECURITY_PATCH_EXTRA, SECURITY_PATCH_EXTRA);
 
         setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");
         setStringSummary(KEY_DEVICE_MODEL, Build.MODEL + DeviceInfoUtils.getMsvSuffix());

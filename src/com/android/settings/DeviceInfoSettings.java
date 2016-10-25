@@ -67,11 +67,16 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_BASEBAND_VERSION = "baseband_version";
     private static final String KEY_FIRMWARE_VERSION = "firmware_version";
     private static final String KEY_SECURITY_PATCH = "security_patch";
+    private static final String KEY_SECURITY_PATCH_EXTRA = "security_patch_extra";
     private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
     private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
     private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
     private static final String KEY_SAFETY_LEGAL = "safetylegal";
+
+    // AndroidID-30403356: external/llvm: -fstack-protector-strong slot ordering broken with alloca/VLAs
+    // AndroidID-36232423: priv_app domain apps on A/B devices can downgrade the OS to previous releases, unlike non-A/B devices
+    private static final String SECURITY_PATCH_EXTRA = "AndroidID-30403356\nAndroidID-36232423";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -111,6 +116,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             setStringSummary(KEY_SECURITY_PATCH, patch);
         } else {
             getPreferenceScreen().removePreference(findPreference(KEY_SECURITY_PATCH));
+        }
+
+        if (!TextUtils.isEmpty(SECURITY_PATCH_EXTRA)) {
+            setStringSummary(KEY_SECURITY_PATCH_EXTRA, SECURITY_PATCH_EXTRA);
+        } else {
+            getPreferenceScreen().removePreference(findPreference(KEY_SECURITY_PATCH_EXTRA));
         }
 
         setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");

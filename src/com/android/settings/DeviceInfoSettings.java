@@ -66,11 +66,18 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_BASEBAND_VERSION = "baseband_version";
     private static final String KEY_FIRMWARE_VERSION = "firmware_version";
     private static final String KEY_SECURITY_PATCH = "security_patch";
+    private static final String KEY_SECURITY_PATCH_EXTRA = "security_patch_extra";
     private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
     private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
     private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
     private static final String KEY_SAFETY_LEGAL = "safetylegal";
+
+    // CVE-2016-8655: Linux AF_PACKET race condition
+    // AndroidID-30403356: external/llvm: -fstack-protector-strong slot ordering broken with alloca/VLAs
+    // AndroidID-31929765: frameworks/native: incomplete fixes for heap overflows in binder
+    // AndroidID-31960359: frameworks/native: uninitialized field in libs/gui
+    private static final String SECURITY_PATCH_EXTRA = "CVE-2016-8655\nAndroidID-30403356\nAndroidID-31929765\nAndroidID-31960359";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -110,6 +117,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             setStringSummary(KEY_SECURITY_PATCH, patch);
         } else {
             getPreferenceScreen().removePreference(findPreference(KEY_SECURITY_PATCH));
+        }
+
+        if (!TextUtils.isEmpty(SECURITY_PATCH_EXTRA)) {
+            setStringSummary(KEY_SECURITY_PATCH_EXTRA, SECURITY_PATCH_EXTRA);
+        } else {
+            getPreferenceScreen().removePreference(findPreference(KEY_SECURITY_PATCH_EXTRA));
         }
 
         setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");

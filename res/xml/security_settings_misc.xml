@@ -40,6 +40,9 @@
         <SwitchPreference android:key="show_password"
                 android:title="@string/show_password"/>
 
+        <SwitchPreference android:key="scramble_pin_layout"
+                android:title="@string/scramble_pin_layout"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="device_admin_category"

@@ -105,6 +105,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
     private static final String KEY_SHOW_PASSWORD = "show_password";
+    private static final String KEY_SCRAMBLE_PIN_LAYOUT = "scramble_pin_layout";
     private static final String KEY_CREDENTIAL_STORAGE_TYPE = "credential_storage_type";
     private static final String KEY_USER_CREDENTIALS = "user_credentials";
     private static final String KEY_RESET_CREDENTIALS = "credentials_reset";
@@ -124,7 +125,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = {
-            KEY_SHOW_PASSWORD, KEY_TOGGLE_INSTALL_APPLICATIONS, KEY_UNIFICATION,
+            KEY_SHOW_PASSWORD, KEY_SCRAMBLE_PIN_LAYOUT, KEY_TOGGLE_INSTALL_APPLICATIONS, KEY_UNIFICATION,
             KEY_VISIBLE_PATTERN_PROFILE, KEY_DENY_NEW_USB, KEY_BACKGROUND_CLIPBOARD
     };
 
@@ -145,6 +146,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private SwitchPreference mUnifyProfile;
 
     private SwitchPreference mShowPassword;
+    private SwitchPreference mScramblePinLayout;
 
     private KeyStore mKeyStore;
     private RestrictedPreference mResetCredentials;
@@ -342,6 +344,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // Show password
         mShowPassword = (SwitchPreference) root.findPreference(KEY_SHOW_PASSWORD);
+        mScramblePinLayout = (SwitchPreference) root.findPreference(KEY_SCRAMBLE_PIN_LAYOUT);
         mResetCredentials = (RestrictedPreference) root.findPreference(KEY_RESET_CREDENTIALS);
 
         // Credential storage
@@ -636,6 +639,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     Settings.System.TEXT_SHOW_PASSWORD, 0) != 0);
         }
 
+        if (mScramblePinLayout != null) {
+            mScramblePinLayout.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.SCRAMBLE_PIN_LAYOUT, 0) != 0);
+        }
+
         if (mResetCredentials != null && !mResetCredentials.isDisabledByAdmin()) {
             mResetCredentials.setEnabled(!mKeyStore.isEmpty());
         }
@@ -821,6 +829,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     ((Boolean) value) ? 1 : 0);
             lockPatternUtils.setVisiblePasswordEnabled((Boolean) value, MY_USER_ID);
+        } else if (KEY_SCRAMBLE_PIN_LAYOUT.equals(key)) {
+            Settings.System.putInt(getContentResolver(), Settings.System.SCRAMBLE_PIN_LAYOUT,
+                    ((Boolean) value) ? 1 : 0);
         } else if (KEY_TOGGLE_INSTALL_APPLICATIONS.equals(key)) {
             if ((Boolean) value) {
                 mToggleAppInstallation.setChecked(false);

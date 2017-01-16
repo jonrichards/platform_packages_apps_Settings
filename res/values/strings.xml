@@ -3729,6 +3729,8 @@
     <string name="auto_punctuate_summary">Press Space key twice to insert \u0022.\u0022</string>
     <!-- On Security & location settings screen, setting check box name. Title of the checkbox to set whether password edit fields will show the most recent character typed and then hide it, or just hide it right away.  By hide, I mean mask it out. -->
     <string name="show_password">Make passwords visible</string>
+    <!-- Scramble PIN layout -->
+    <string name="scramble_pin_layout">Scramble PIN layout</string>
     <!-- Warning message about security implications of enabling an input method, displayed as a dialog
          message when the user selects to enable an IME. -->
     <string name="ime_security_warning">This input method may be able to collect

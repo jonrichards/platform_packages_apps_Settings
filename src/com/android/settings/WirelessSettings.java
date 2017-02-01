@@ -32,6 +32,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserHandle;
@@ -236,7 +237,8 @@ public class WirelessSettings extends SettingsPreferenceFragment
         final boolean isAdmin = mUm.isAdminUser();
 
         final Activity activity = getActivity();
-        if (!isAdmin) {
+        final String board = Build.BOARD;
+        if (!isAdmin || "bullhead".equals(board) || "marlin".equals(board) || "sailfish".equals(board)) {
             PreferenceScreen root = getPreferenceScreen();
             root.removePreference(root.findPreference(KEY_RANDOMIZE_MAC));
         } else {

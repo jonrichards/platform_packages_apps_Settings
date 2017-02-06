@@ -75,9 +75,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
     // CVE-2016-8655: Linux AF_PACKET race condition
     // AndroidID-30403356: external/llvm: -fstack-protector-strong slot ordering broken with alloca/VLAs
-    // AndroidID-31929765: frameworks/native: incomplete fixes for heap overflows in binder
-    // AndroidID-31960359: frameworks/native: uninitialized field in libs/gui
-    private static final String SECURITY_PATCH_EXTRA = "CVE-2016-8655\nAndroidID-30403356\nAndroidID-31929765\nAndroidID-31960359";
+    private static final String SECURITY_PATCH_EXTRA = "CVE-2016-8655\nAndroidID-30403356";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 

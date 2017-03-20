@@ -73,9 +73,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
     private static final String KEY_SAFETY_LEGAL = "safetylegal";
 
-    // CVE-2016-8655: Linux AF_PACKET race condition
     // AndroidID-30403356: external/llvm: -fstack-protector-strong slot ordering broken with alloca/VLAs
-    private static final String SECURITY_PATCH_EXTRA = "CVE-2016-8655\nAndroidID-30403356";
+    private static final String SECURITY_PATCH_EXTRA = "AndroidID-30403356";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 

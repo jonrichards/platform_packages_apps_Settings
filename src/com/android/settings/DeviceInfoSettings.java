@@ -76,7 +76,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
     // CVE-2017-7184: xfrm_replay_verify_len
     // AndroidID-30403356: external/llvm: -fstack-protector-strong slot ordering broken with alloca/VLAs
-    private static final String SECURITY_PATCH_EXTRA = "CVE-2017-7184\nAndroidID-30403356";
+    // AndroidID-36232423: priv_app domain apps on A/B devices can downgrade the OS to previous releases, unlike non-A/B devices
+    private static final String SECURITY_PATCH_EXTRA = "CVE-2017-7184\nAndroidID-30403356\nAndroidID-36232423";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 

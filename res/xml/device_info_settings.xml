@@ -140,6 +140,17 @@
                 settings:allowDividerAbove="true"
                 settings:allowDividerBelow="true"/>
 
+        <!-- Device Bootloader version -->
+        <com.android.settings.DividerPreference
+                android:key="bootloader_version"
+                android:enabled="false"
+                android:shouldDisableView="false"
+                android:selectable="false"
+                android:title="@string/bootloader_version"
+                android:summary="@string/device_info_default"
+                settings:allowDividerAbove="true"
+                settings:allowDividerBelow="true"/>
+
         <!-- Device Kernel version -->
         <com.android.settings.DividerPreference
                 android:key="kernel_version"

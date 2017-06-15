@@ -65,6 +65,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_DEVICE_MODEL = "device_model";
     private static final String KEY_SELINUX_STATUS = "selinux_status";
     private static final String KEY_BASEBAND_VERSION = "baseband_version";
+    private static final String KEY_BOOTLOADER_VERSION = "bootloader_version";
     private static final String KEY_FIRMWARE_VERSION = "firmware_version";
     private static final String KEY_SECURITY_PATCH = "security_patch";
     private static final String KEY_SECURITY_PATCH_EXTRA = "security_patch_extra";
@@ -125,6 +126,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         }
 
         setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");
+        setValueSummary(KEY_BOOTLOADER_VERSION, "ro.boot.bootloader");
         setStringSummary(KEY_DEVICE_MODEL, Build.MODEL + DeviceInfoUtils.getMsvSuffix());
         setValueSummary(KEY_EQUIPMENT_ID, PROPERTY_EQUIPMENT_ID);
         setStringSummary(KEY_DEVICE_MODEL, Build.MODEL);

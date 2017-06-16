@@ -60,10 +60,15 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_LEGACY_SYSTEM_UPDATE_SETTINGS = "legacy_system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     private static final String PROPERTY_SELINUX_STATUS = "ro.build.selinux";
+    private static final String PROPERTY_VERIFIED_BOOT_STATE = "ro.boot.verifiedbootstate";
+    private static final String PROPERTY_VERITY_MODE = "ro.boot.veritymode";
+    private static final String PROPERTY_PARTITION_SYSTEM_VERIFIED = "partition.system.verified";
+    private static final String PROPERTY_PARTITION_VENDOR_VERIFIED = "partition.vendor.verified";
     private static final String KEY_KERNEL_VERSION = "kernel_version";
     private static final String KEY_BUILD_NUMBER = "build_number";
     private static final String KEY_DEVICE_MODEL = "device_model";
     private static final String KEY_SELINUX_STATUS = "selinux_status";
+    private static final String KEY_VERIFIED_BOOT_STATUS = "verified_boot_status";
     private static final String KEY_BASEBAND_VERSION = "baseband_version";
     private static final String KEY_BOOTLOADER_VERSION = "bootloader_version";
     private static final String KEY_FIRMWARE_VERSION = "firmware_version";
@@ -145,6 +150,15 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         // Remove selinux information if property is not present
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SELINUX_STATUS,
                 PROPERTY_SELINUX_STATUS);
+
+        final String verifiedBootState = SystemProperties.get(PROPERTY_VERIFIED_BOOT_STATE);
+        final String verityMode = SystemProperties.get(PROPERTY_VERITY_MODE);
+        final int partitionSystemVerified = SystemProperties.getInt(PROPERTY_PARTITION_SYSTEM_VERIFIED, 0);
+        final int partitionVendorVerified = SystemProperties.getInt(PROPERTY_PARTITION_VENDOR_VERIFIED, 0);
+        if (("green".equals(verifiedBootState) || "yellow".equals(verifiedBootState)) &&
+                "enforcing".equals(verityMode) && partitionSystemVerified == 2 && partitionVendorVerified == 2) {
+            setStringSummary(KEY_VERIFIED_BOOT_STATUS, getString(R.string.verified_boot_status_enforcing));
+        }
 
         // Remove Safety information preference if PROPERTY_URL_SAFETYLEGAL is not set
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SAFETY_LEGAL,

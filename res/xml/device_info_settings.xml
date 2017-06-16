@@ -191,4 +191,15 @@
                 settings:allowDividerAbove="true"
                 settings:allowDividerBelow="true"/>
 
+        <!-- Anti-theft protection status information -->
+        <com.android.settings.DividerPreference
+                android:key="anti_theft_protection_status"
+                android:enabled="false"
+                android:shouldDisableView="false"
+                android:selectable="false"
+                android:title="@string/anti_theft_protection_status"
+                android:summary="@string/anti_theft_protection_status_enforcing"
+                settings:allowDividerAbove="true"
+                settings:allowDividerBelow="true"/>
+
 </PreferenceScreen>

@@ -29,6 +29,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.service.persistentdata.PersistentDataBlockManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.telephony.CarrierConfigManager;
@@ -69,6 +70,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_DEVICE_MODEL = "device_model";
     private static final String KEY_SELINUX_STATUS = "selinux_status";
     private static final String KEY_VERIFIED_BOOT_STATUS = "verified_boot_status";
+    private static final String KEY_ANTI_THEFT_PROTECTION_STATUS = "anti_theft_protection_status";
     private static final String KEY_BASEBAND_VERSION = "baseband_version";
     private static final String KEY_BOOTLOADER_VERSION = "bootloader_version";
     private static final String KEY_FIRMWARE_VERSION = "firmware_version";
@@ -158,6 +160,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         if (("green".equals(verifiedBootState) || "yellow".equals(verifiedBootState)) &&
                 "enforcing".equals(verityMode) && partitionSystemVerified == 2 && partitionVendorVerified == 2) {
             setStringSummary(KEY_VERIFIED_BOOT_STATUS, getString(R.string.verified_boot_status_enforcing));
+        }
+
+        final PersistentDataBlockManager manager = (PersistentDataBlockManager)
+                getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+        if (manager.getOemUnlockEnabled() || manager.getFlashLockState() != manager.FLASH_LOCK_LOCKED) {
+            setStringSummary(KEY_ANTI_THEFT_PROTECTION_STATUS, getString(R.string.anti_theft_protection_status_disabled));
         }
 
         // Remove Safety information preference if PROPERTY_URL_SAFETYLEGAL is not set

@@ -138,9 +138,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_ENTERPRISE_PRIVACY = "enterprise_privacy";
     private static final String KEY_MANAGE_DEVICE_ADMIN = "manage_device_admin";
 
+    private static final String KEY_KEYGUARD_CAMERA = "keyguard_camera";
+    private static final String KEYGUARD_CAMERA_PERSIST_PROP = "persist.keyguard.camera";
+
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = {
-            KEY_SHOW_PASSWORD, KEY_UNIFICATION, KEY_VISIBLE_PATTERN_PROFILE, KEY_DENY_NEW_USB
+            KEY_SHOW_PASSWORD, KEY_UNIFICATION, KEY_VISIBLE_PATTERN_PROFILE, KEY_DENY_NEW_USB,
+            KEY_KEYGUARD_CAMERA
     };
 
     // Only allow one trust agent on the platform.
@@ -171,6 +175,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private int mProfileChallengeUserId;
 
     private ListPreference mDenyNewUsb;
+    private SwitchPreference mKeyguardCamera;
 
     private String mCurrentDevicePassword;
     private String mCurrentProfilePassword;
@@ -324,11 +329,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         if (mIsAdmin) {
             mDenyNewUsb = (ListPreference) findPreference(KEY_DENY_NEW_USB);
+            mKeyguardCamera = (SwitchPreference) findPreference(KEY_KEYGUARD_CAMERA);
         } else {
             PreferenceGroup securityCategory = (PreferenceGroup)
                     root.findPreference(KEY_SECURITY_CATEGORY);
             if (securityCategory != null) {
                 securityCategory.removePreference(securityCategory.findPreference(KEY_DENY_NEW_USB));
+                securityCategory.removePreference(securityCategory.findPreference(KEY_KEYGUARD_CAMERA));
             }
         }
 
@@ -629,6 +636,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (mDenyNewUsb != null) {
             mDenyNewUsb.setValue(SystemProperties.get(DENY_NEW_USB_PERSIST_PROP, "disabled"));
         }
+
+        if (mKeyguardCamera != null) {
+            mKeyguardCamera.setChecked(SystemProperties.getBoolean(KEYGUARD_CAMERA_PERSIST_PROP, true));
+        }
     }
 
     private void updateUnificationPreference() {
@@ -822,6 +833,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if (mode.equals("dynamic")) {
                 SystemProperties.set(DENY_NEW_USB_PROP, "0");
             }
+        } else if (KEY_KEYGUARD_CAMERA.equals(key)) {
+            SystemProperties.set(KEYGUARD_CAMERA_PERSIST_PROP, (Boolean) value ? "1" : "0");
         }
         return result;
     }

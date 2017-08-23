@@ -57,11 +57,7 @@ public class SystemUpdatePreferenceController extends PreferenceController {
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        if (isAvailable()) {
-            Utils.updatePreferenceToSpecificActivityOrRemove(mContext, screen,
-                    KEY_SYSTEM_UPDATE_SETTINGS,
-                    Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        } else {
+        if (!isAvailable()) {
             removePreference(screen, KEY_SYSTEM_UPDATE_SETTINGS);
         }
     }

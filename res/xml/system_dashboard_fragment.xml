@@ -35,7 +35,9 @@
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_system_update"
         android:order="-30">
-        <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS" />
+        <intent android:action="android.intent.action.MAIN"
+            android:targetPackage="co.copperhead.updater"
+            android:targetClass="co.copperhead.updater.Settings" />
     </Preference>
 
     <Preference

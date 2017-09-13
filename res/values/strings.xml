@@ -2522,7 +2522,7 @@
         CVE-2017-1000370: PIE ASLR base
         CVE-2017-1000371: PIE ASLR base
     -->
-    <string name="security_patch_extra_summary">AndroidID-36232423\nAndroidID-37160362\nCVE-2017-1000370\nCVE-2017-1000371</string>
+    <string name="security_patch_extra_summary">AndroidID-36232423\nAndroidID-37160362\nCVE-2017-1000370\nCVE-2017-1000371\nSeptember 5, 2017 Android kernel</string>
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
     <string name="storage_settings" >Storage</string>
     <!-- Main settings screen item's title to go into the storage & USB settings screen [CHAR LIMIT=25] -->

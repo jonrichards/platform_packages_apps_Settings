@@ -77,6 +77,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
                 networkScoreManagerWrapper, getLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new RandomizeMacPreferenceController(context));
         controllers.add(new WifiWakeupPreferenceController(context, getLifecycle()));
         controllers.add(new NetworkScorerPickerPreferenceController(context,
                 networkScoreManagerWrapper));
